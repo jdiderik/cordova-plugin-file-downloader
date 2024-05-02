@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-file-downloader",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Downloads files to persistant Storage on your Phone, checks md5sum if you want, unzips packed files if necessary (For Android and iOS)",
   "cordova": {
     "id": "cordova-plugin-file-downloader",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mramonlopez/cordova-plugin-file-downloader.git"
+    "url": "https://github.com/jdiderik/cordova-plugin-file-downloader.git"
   },
   "keywords": [
     "cordova",
