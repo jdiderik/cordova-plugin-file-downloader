@@ -199,9 +199,12 @@ var Downloader = {
    * @param {FileObject} fileObject
    */
   transferFile: function(fileObject) {
-    //console.log("tranfserFile");
-    var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
-	// var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+    // var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+	var filePath = Downloader.localFolder.nativeURL + fileObject.name;
+	console.log("tranfserFile");
+	console.log(filePath);
+	debugger;
+   // var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
     Downloader.transfer = new FileTransfer();
     Downloader.transfer.onprogress = function(progressEvent) {
       if (progressEvent.lengthComputable) {
@@ -218,6 +221,30 @@ var Downloader = {
     });
   },
 
+	// transferFile: function(fileObject) {
+	// 	const xhr = new XMLHttpRequest();
+	// 	var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+		
+	// 	xhr.open('GET', fileObject.url, true);
+	// 	xhr.responseType = 'blob';
+	// 	xhr.onload = function () {
+	// 		const blob = xhr.response;
+	// 		if (xhr.status != 200) {
+	// 			console.error(`request error ${xhr.status}: ${xhr.statusText}`);
+	// 			return;
+	// 		}
+	// 		fileEntry.createWriter(function (fileWriter) {
+	// 			fileWriter.onwriteend = () => window.alert('download complete');
+	// 			fileWriter.onerror = error => console.log(`file writing error: ${error}`);
+	// 			fileWriter.write(blob);
+	// 		});
+	// 	};
+	// 	xhr.onerror = function() {
+	// 		console.log('request error')
+	// 	}
+	// 	xhr.send();
+	// }
+
   /**
    * unzips the file
    * @param {String} fileName
@@ -225,6 +252,7 @@ var Downloader = {
   //TODO: full fileEntry as param? not only fileName
   _unzip: function(fileName) {
     var folderUrl = Downloader.localFolder.toURL();
+	debugger;
     zip.unzip(folderUrl + "/" + fileName, folderUrl, function(code) {
       if (code == 0) {
         document.dispatchEvent(createEvent("DOWNLOADER_unzipSuccess", [fileName]));
@@ -244,6 +272,7 @@ var Downloader = {
    */
   check: function(fileName, md5) {
     var folder = Downloader.localFolder;
+	debugger;
     folder.getFile(fileName, {
       create: false,
       exclusive: false
