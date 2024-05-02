@@ -199,9 +199,11 @@ var Downloader = {
    * @param {FileObject} fileObject
    */
   transferFile: function(fileObject) {
-    //console.log("tranfserFile");
-    var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
-	// var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+    // var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+	var filePath = Downloader.localFolder.nativeURL + fileObject.name;
+	console.log("tranfserFile");
+	console.log(Downloader.localFolder);
+   // var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
     Downloader.transfer = new FileTransfer();
     Downloader.transfer.onprogress = function(progressEvent) {
       if (progressEvent.lengthComputable) {
@@ -217,6 +219,30 @@ var Downloader = {
       document.dispatchEvent(createEvent("DOWNLOADER_downloadError", [error]));
     });
   },
+
+	// transferFile: function(fileObject) {
+	// 	const xhr = new XMLHttpRequest();
+	// 	var filePath = Downloader.localFolder.toURL() + "/" + fileObject.name;
+		
+	// 	xhr.open('GET', fileObject.url, true);
+	// 	xhr.responseType = 'blob';
+	// 	xhr.onload = function () {
+	// 		const blob = xhr.response;
+	// 		if (xhr.status != 200) {
+	// 			console.error(`request error ${xhr.status}: ${xhr.statusText}`);
+	// 			return;
+	// 		}
+	// 		fileEntry.createWriter(function (fileWriter) {
+	// 			fileWriter.onwriteend = () => window.alert('download complete');
+	// 			fileWriter.onerror = error => console.log(`file writing error: ${error}`);
+	// 			fileWriter.write(blob);
+	// 		});
+	// 	};
+	// 	xhr.onerror = function() {
+	// 		console.log('request error')
+	// 	}
+	// 	xhr.send();
+	// }
 
   /**
    * unzips the file
